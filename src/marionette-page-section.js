@@ -1,11 +1,18 @@
-(function (_, MarionettePage) {
+(function (Marionette, MarionettePage) {
 
-  MarionettePage.Section = {
-
+  MarionettePage.Section = function (options) {
+    MarionettePage.Section.prototype.constructor.call(this, options);
   };
 
-  MarionettePage.Section.extend = function (subClass) {
-    return _.extend(MarionettePage.Section, subClass);
+  MarionettePage.Section.prototype.constructor = function (options) {
+    this.initialize.call(this, options);
   };
 
-})(_, MarionettePage);
+  MarionettePage.Section.prototype.initialize = function (options) {
+    // Default initialize method. Is meant to be overridden.
+  };
+
+  MarionettePage.Section.extend = Marionette.extend;
+
+
+})(Backbone.Marionette, MarionettePage);

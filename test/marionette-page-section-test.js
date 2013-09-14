@@ -1,14 +1,18 @@
-(function (undefined, QUnit, sinon, MarionettePage) {
-
-  var TestSection = MarionettePage.Section.extend({
-    initialize: function (options) {
-      // Possible override.
-    }
-  });
+(function (QUnit, sinon, Marionette, MarionettePage) {
 
   var createTestSection = function () {
     return new TestSection();
   };
+
+  var TestSectionController = Marionette.Controller.extend({});
+  var testSectionController = new TestSectionController();
+
+  var TestSection = MarionettePage.Section.extend({
+    controller: testSectionController,
+    initialize: function (options) {
+      // Possible override.
+    }
+  });
 
   QUnit.module("Marionette Page Section Test Suite", {
     setup: function () {
@@ -35,4 +39,17 @@
     ok(testSection.initialize.calledOnce);
   });
 
-})(undefined, QUnit, sinon, MarionettePage);
+  QUnit.test("constructor_callConstructorWithControllerObject_shouldGetSameControllerObjectBack", function () {
+    // Assign
+    var testSection = createTestSection();
+    var expectedTestSectionController = testSectionController;
+    var actualTestSectionController;
+
+    // Act
+    actualTestSectionController = testSection.getController();
+
+    // Assert
+    deepEqual(actualTestSectionController, expectedTestSectionController);
+  });
+
+})(QUnit, sinon, Marionette, MarionettePage);

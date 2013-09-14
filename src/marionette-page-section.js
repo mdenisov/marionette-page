@@ -12,6 +12,10 @@
     // Default initialize method. Is meant to be overridden.
   };
 
+  MarionettePage.Section.prototype.getController = function () {
+    return this.controller;
+  };
+
   MarionettePage.Section.extend = Marionette.extend;
 
 
